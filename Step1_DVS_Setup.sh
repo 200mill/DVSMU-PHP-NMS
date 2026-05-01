@@ -16,4 +16,3 @@ grep -qxF "alias dvs='sudo /usr/local/dvs/dvs'" ~/.bashrc || echo "alias dvs='su
 
 source ~/.bashrc
 
-dvs
