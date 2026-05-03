@@ -7,10 +7,16 @@
 **dvsNMS**는 DV Switch 멀티유저 버전 관리자를 위한 강력한 웹 기반 네트워크 관리 시스템(NMS)입니다. 시스템 모니터링, 멀티유저 관리, 텔레그램 연동 알림 등 서버 관리에 필요한 핵심 기능들을 통합 제공합니다.
 
 > [!CAUTION]
-> 설치 과정 중 원치 않는 단계는 건너뛸 수 있으나, 필수 패키지가 누락되어 발생하는 시스템 오류는 해결되지 않을 수 있습니다. 가급적 자동 설치나 순차적인 수동 설치를 권장합니다.
+> ver2.0 부터 PORT규칙이 변경되었습니다.<BR>
+> 기존 DVS 서비스에 업데이트 이후에는 NMS에서만 설정해야합니다.<BR>
+> 시스템의 마이그레이션을 원치 않으시면 Ver1.0을 사용하시고<BR>
+> 사용자 관리는 콘솔에서 해주시기 바랍니다.<BR><BR>
+> 설치 과정 중 원치 않는 단계는 건너뛸 수 있으나, <br>
+> 필수 패키지가 누락되어 발생하는 시스템 오류는 해결되지 않을 수 있습니다. <BR>
+> 가급적 자동 설치나 순차적인 수동 설치를 권장합니다.
 
-<div align="center">
-  <img src="https://github.com/DS1UYM/DVSMU-PHP-NMS/blob/main/NMS_cap_20260417.png" alt="dvsNMS Dashboard Screenshot" width="800">
+<div align="left">
+  <img src="https://github.com/DS1UYM/DVSMU-PHP-NMS/blob/main/NMS_cap_20260426.png" alt="dvsNMS Dashboard Screenshot" width="800">
 </div>
 
 ---
@@ -21,15 +27,17 @@
 > **기존 사용자 안내:** 전체를 다시 설치할 필요 없이 **[수동 설치 - Step2]**만 재설치하시면 최신 버전이 적용됩니다.
 
 * **통합 및 편의성 강화**
+  * 웹페이지에서 모든 설정 가능
   * 관리자 페이지 패스워드 관리 기능 통합
   * '시스템 자동 재부팅' 예약 관리 기능 추가
   * 개발자 '공지사항' 및 '뉴스' 플립창 추가, BM Hoseline 바로가기 제공
   * 유저별 최근 접속일자 기록 및 확인
   * 서버 자동 재부팅 일정 관리
+  * 메인 페이지에 LastHeard 모니터링 페이지가 통합되었습니다
 * **실시간 모니터링 및 통계**
   * **[통계]** 페이지 추가: 사용자별 이용량 확인 가능
   * Websocket 방식 적용으로 실시간 대시보드 반응 속도 대폭 향상 (⚠️ **TCP 3000 포트 개방 필수**)
-  * *참고: 기존의 오디오 모니터 기능은 제거되었습니다.*
+  * *사용자 모디오 청취는 추가 업데이트가 필요합니다*
 * **스마트 알림 (Telegram)**
   * 즐겨찾기 유저에 대한 텔레그램 실시간 알
   * 일일 리포트 텔레그램 자동 발송 기능 추가
@@ -38,7 +46,11 @@
   * `dvsMU` 패키지 설치 없이도 웹상에서 멀티유저 추가/삭제/편집 완벽 지원
   * 멀티유저 생성 수 제한 해제
 * **서버 데이터 백업 및 복원**
-  * 서버 데이터 전체에 대한 원클릭 백업 및 복원
+  * 서버 데이터 전체에 대한 원클릭 백업 및 복원 - 버그 수정 완료
+  * 백업 용량 간소화
+* 사용자 포트 TOPOLOGY 제공
+* 간편 방화벽 관리 기능 추가
+* 사용자별 실시간 로그 확인 가능
   
 ---
 
@@ -73,10 +85,18 @@ SSH [계정]@[서버주소]
 
 ### 💡 [방법 A] 자동 설치 (권장)
 단일 스크립트로 필요한 모든 구성을 자동으로 진행합니다.
-
+<BR>
+Ver 1.0 (구버전)
 ```
 cd /tmp
 wget -O setup https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Auto_Install.sh
+sudo chmod +x ./setup
+sudo ./setup
+```
+Ver 2.0 (최신버전)
+```
+cd /tmp
+wget -O setup https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Auto_Install_ver2.sh
 sudo chmod +x ./setup
 sudo ./setup
 ```
@@ -102,10 +122,19 @@ sudo ./setup1
 ```
 <BR>
 
-Step 2. NMS 패키지 설치
+Step 2. NMS 패키지 설치 Ver 1.0
 ```
 cd /tmp
 wget -O setup2 https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Step2_NMS_Setup.run
+sudo chmod +x ./setup2
+sudo ./setup2
+```
+<BR><BR>
+
+Step 2. NMS 패키지 설치 Ver 2.0
+```
+cd /tmp
+wget -O setup2 https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Step2_NMS_Setup_ver2.run
 sudo chmod +x ./setup2
 sudo ./setup2
 ```
@@ -119,6 +148,9 @@ Step 2까지 설치를 마친 후, 웹 브라우저를 통해 http://[서버-IP-
 
 로그인 후 '접속자 관리' 페이지에서 메인 유저(00) 설정 부터 완료해 주세요.
 
+무한 유저 적용을 위해 사용자 PORT규칙이 변경되었습니다.
+
+기존 DVS 또는 DVSMU 사용자는 이후 모든 설정을 NMS에서 하셔야 합니다.
 <BR>
 
 ### 2. Step 4. NMS+TG 알림봇(텔레그램) 연동
@@ -131,7 +163,4 @@ Step 2까지 설치를 마친 후, 웹 브라우저를 통해 http://[서버-IP-
 > 발급받은 API 토큰과 Chat ID를 NMS 웹페이지의 'TG알리미' 설정 메뉴에 입력합니다.
 
 
-<br><br>
-## 🗓 다음 업데이트 예정 사항
-* 방화벽 자동 구성: DVS에서 실제 사용하는 포트만 선별하여 방화벽(UFW/iptables)을 자동으로 설정하는 기능이 추가될 예정입니다.<br>
-* 서버 데이터 자동 백업 : 정기적 스케쥴링에 따른 서버데이터의 자동 백업 유무 기능이 추가될 예정입니다.
+
