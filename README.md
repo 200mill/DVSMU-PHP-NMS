@@ -2,7 +2,7 @@
 
 [![Platform](https://img.shields.io/badge/Platform-Debian-A80030.svg?logo=debian&logoColor=white)](#)
 [![Language](https://img.shields.io/badge/Language-Bash%20%2F%20PHP-4D5A92.svg)](#)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 **dvsNMS**는 DV Switch 멀티유저 버전 관리자를 위한 강력한 웹 기반 네트워크 관리 시스템(NMS)입니다. 시스템 모니터링, 멀티유저 관리, 텔레그램 연동 알림 등 서버 관리에 필요한 핵심 기능들을 통합 제공합니다.
 
