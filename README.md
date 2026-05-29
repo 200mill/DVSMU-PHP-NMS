@@ -131,7 +131,7 @@ sudo ./setup2
 ```
 <BR><BR>
 
-Step 2. NMS 패키지 설치 Ver 2.1
+Step 2. NMS 패키지 설치 Ver 2.2
 ```
 cd /tmp
 wget -O setup2 https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Step2_NMS_Setup_V2.2.run
