@@ -93,7 +93,7 @@ wget -O setup https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Auto_I
 sudo chmod +x ./setup
 sudo ./setup
 ```
-Ver 2.1 (최신버전)
+Ver 2.2 (최신버전)
 ```
 cd /tmp
 wget -O setup https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Auto_Install_ver2.sh
@@ -134,7 +134,7 @@ sudo ./setup2
 Step 2. NMS 패키지 설치 Ver 2.1
 ```
 cd /tmp
-wget -O setup2 https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Step2_NMS_Setup_ver2.1.run
+wget -O setup2 https://raw.githubusercontent.com/ds1uym/DVSMU-PHP-NMS/main/Step2_NMS_Setup_V2.2.run
 sudo chmod +x ./setup2
 sudo ./setup2
 ```
